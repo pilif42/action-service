@@ -1,0 +1,38 @@
+[
+{  
+   "createdDateTime":1460736159699,
+   "partyId":"7fac359e-645b-487e-bb02-70536eae51d4",
+   "caseId":"7fac359e-645b-487e-bb02-70536eae51d4",
+   "category":"GENERAL_ENQUIRY",
+   "subCategory":"subcat",
+   "createdBy":"me",
+   "description":"desc"
+},
+{  
+   "createdDateTime":1460736159699,
+   "partyId":"7fac359e-645b-487e-bb02-70536eae51d4",
+   "caseId":"7fac359e-645b-487e-bb02-70536eae51d4",
+   "category":"GENERAL_ENQUIRY",
+   "subCategory":"subcat",
+   "createdBy":"me",
+   "description":"desc"
+},
+{  
+   "createdDateTime":1460736159699,
+   "partyId":"7fac359e-645b-487e-bb02-70536eae51d4",
+   "caseId":"7fac359e-645b-487e-bb02-70536eae51d4",
+   "category":"GENERAL_ENQUIRY",
+   "subCategory":"subcat",
+   "createdBy":"me",
+   "description":"desc"
+},
+{  
+   "createdDateTime":1460736159699,
+   "partyId":"7fac359e-645b-487e-bb02-70536eae51d4",
+   "caseId":"7fac359e-645b-487e-bb02-70536eae51d4",
+   "category":"GENERAL_ENQUIRY",
+   "subCategory":"subcat",
+   "createdBy":"me",
+   "description":"desc"
+}
+]
