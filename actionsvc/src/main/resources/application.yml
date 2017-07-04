@@ -1,5 +1,5 @@
 info:
-  contactEmail: philip.whiles@ons.gov.uk
+  contactEmail: philippe.brossier@ons.gov.uk
   version: ${project.version}
   commit: ${buildNumber}
   branch: ${scmBranch}
@@ -9,7 +9,9 @@ info:
 # ie -Dlogging.level.org.springframework=DEBUG
 logging:
   level:
-    uk.gov.ons.ctp: DEBUG
+    uk.gov.ons.ctp: WARN
+    org.springframework.retry: DEBUG
+    org.springframework.integration.handler.advice: DEBUG
     org.springframework.cloud.sleuth.instrument.messaging.MessagingSpanExtractor: ERROR
     org.springframework.context.annotation.ConfigurationClassPostProcessor: ERROR
   profile: DEV
@@ -166,7 +168,7 @@ collection-exercise-svc:
 
  # calling the party svc endpoint
 party-svc:
-  party-by-sample-unit-type-and-id-path: /parties/type/{sampleUnitType}/id/{id}
+  party-by-sample-unit-type-and-id-path: /party-api/v1/parties/type/{sampleUnitType}/id/{id}
   connection-config:
     scheme: http
     host: ras-party-v2-int.apps.mvp.onsclofo.uk
@@ -202,7 +204,17 @@ rabbitmq:
   virtualhost: /
   
 messaging:
+  backoffInitial: 5000
+  backoffMultiplier: 3
+  backoffMax: 45000
   consumingThreads: 1
-  maxAttempts: 1
+  maxAttempts: 3
   prefetchCount: 10
   txSize: 1
+
+swagger-settings:
+  swagger-ui-active: true
+  group-name: "actionservice-api"
+  title: "Action Service API"
+  description: "API for the Action Service"
+  version: "10.41"
