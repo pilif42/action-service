@@ -1,0 +1,41 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 10.46.0-1
+      author: Sarah Radford
+      changes:
+        - sqlFile:
+            comment: Action report changes
+            path: action_report_changes.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+
+  - changeSet:
+      id: 10.46.0-2
+      author: Sarah Radford
+      changes:
+        - sqlFile:
+            comment: Add unique constraint to action plan name
+            path: unique_actionplan_name.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+
+  - changeSet:
+      id: 10.46.0-3
+      author: Sarah Radford
+      changes:
+        - sqlFile:
+            comment: Remove actionplan PK from report
+            path: action_report_remove_pk.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+
+  - changeSet:
+      id: 10.46.0-4
+      author: Sarah Radford
+      changes:
+        - sqlFile:
+            comment: Update offsets
+            path: update_seeddata_action.sql
+            relativeToChangelogFile: true
+            splitStatements: false

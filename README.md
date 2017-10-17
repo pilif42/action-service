@@ -1,33 +1,26 @@
-## To build
-./mvnw clean install
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3a24e234068a4a1396ff5f3ff9ab64d9)](https://www.codacy.com/app/sdcplatform/rm-action-service?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ONSdigital/rm-action-service&amp;utm_campaign=Badge_Grade) [![Docker Pulls](https://img.shields.io/docker/pulls/sdcplatform/actionsvc.svg)]()
 
+# Action Service
+This repository contains the Action service. This microservice is a RESTful web service implemented using [Spring Boot](http://projects.spring.io/spring-boot/).
+It receives actionLifeCycle event messages via RabbitMQ from the action Service, which indicates what has happened to a action ie activation, deactivation etc
+The action service will execute an action plan for each action that is actionable, off of which actions are created.
+Each action follows a state transition model or path, which involves distribution of the actions to handlers, and for some types of actions, the service will expect
+feedback messages indicating successful downstream processing of the action or otherwise by the handler.
 
-## To be able to log to file
-sudo mkdir -p /var/log/ctp/responsemanagement/actionsvc 
-sudo chmod -R 777 /var/log/ctp
+The action service is agnostic of what any given handler will actually do with the action sent to it, and as such, will send the same format of ActionInstruction message to each handler.
+It is upto the handler to pick out what information is relevant to it from the instruction sent to it by this service.
 
+## Running
 
-## To run
-The app can be started from the command line using : ./mvnw spring-boot:run
+    mvn clean install
+    cd actionsvc
+    ./mvnw spring-boot:run
 
+## API
+See [API.md](https://github.com/ONSdigital/rm-action-service/blob/master/API.md) for API documentation.
 
-## To test action plans
-curl http://localhost:8151/actionplans -v -X GET
-200 [{"actionPlanId":1,"surveyId":1,"name":"HH","description":"Household Action Plan","createdBy":"SYSTEM", "createdDatetime":"2016-03-09T11:15:48.002+0000","lastGoodRunDatetime":null},...
+## Swagger Specifications
+To view the Swagger Specifications for the Action Service, run the service and navigate to http://localhost:8151/swagger-ui.html.
 
-curl  -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:8151/actionplans/1 -v -X PUT -d "{\"description\":\"philippe2testing\"}"
-200 {"actionPlanId":1,"surveyId":1,"name":"HH","description":"philippetesting","createdBy":"SYSTEM","createdDatetime":"2016-03-10T15:10:39.494+0000","lastGoodRunDatetime":null}
-
-
-## To test action plan jobs
-curl http://localhost:8151/actionplans/1/jobs -v -X GET
-200 [{"actionPlanJobId":3,"actionPlanId":1,"createdBy":"philippeb","state":"SUBMITTED","createdDatetime":"2016-04-04T11:04:27.102+0000","updatedDateTime":"2016-04-04T11:04:27.102+0000"}]
-
-curl http://localhost:8151/actionplans/jobs/1 -v -X GET
-404 {"error":{"code":"RESOURCE_NOT_FOUND","timestamp":"20160315173011978","message":"ActionPlanJob not found for id 1"}}
-
-curl  -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:8151/actionplans/1/jobs -v -X POST -d "{\"createdBy\":\"philippeb\"}"
-200 {"actionPlanJobId":3,"actionPlanId":1,"createdBy":"philippeb","state":"SUBMITTED","createdDatetime":"2016-04-04T11:04:27.102+0000","updatedDateTime":"2016-04-04T11:04:27.102+0000"}
-
-curl  -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:8151/actionplans/1/jobs -v -X POST -d "{\"created\":\"philippeb\"}"
-400 {"error":{"code":"VALIDATION_FAILED","timestamp":"20160316151946434","message":"Provided json is incorrect."}}
+## Copyright
+Copyright (C) 2017 Crown Copyright (Office for National Statistics)

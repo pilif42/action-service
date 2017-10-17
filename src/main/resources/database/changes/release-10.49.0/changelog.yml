@@ -1,0 +1,11 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 10.49.0-1
+      author: Philippe Brossier
+      changes:
+        - sqlFile:
+            comment: dlq_actioninstruction table to enable replay of ActionInstructions after Publisher Confirms issue
+            path: table_dlq_actioninstruction.sql
+            relativeToChangelogFile: true
+            splitStatements: false

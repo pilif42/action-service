@@ -1,0 +1,21 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 10.47.0-1
+      author: Sarah Radford
+      changes:
+        - sqlFile:
+            comment: Action report change
+            path: amend_action_report.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+
+  - changeSet:
+      id: 10.47.0-2
+      author: Sarah Radford
+      changes:
+        - sqlFile:
+            comment: Change rule offsets
+            path: change_action_offsets.sql
+            relativeToChangelogFile: true
+            splitStatements: false

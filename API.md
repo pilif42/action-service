@@ -1,5 +1,20 @@
 # Action Service API
-This page documents the Action service API endpoints. These endpoints will be secured using HTTP basic authentication initially. All endpoints return an `HTTP 200 OK` status code except where noted otherwise.
+This page documents the Action service API endpoints. Apart from the Service Information endpoint, all these endpoints are secured using HTTP basic authentication. All endpoints return an `HTTP 200 OK` status code except where noted otherwise.
+
+## Service Information
+* `GET /info` will return information about this service, collated from when it was last built.
+
+### Example JSON Response
+```json
+{
+  "name": "actionsvc",
+  "version": "10.42.0",
+  "origin": "git@github.com:ONSdigital/rm-action-service.git",
+  "commit": "06752afbf05f27c923ddf42d3cd2ec9eeafd3362",
+  "branch": "master",
+  "built": "2017-07-12T08:38:34Z"
+}
+```
 
 ## List Actions
 * `GET /actions` will return a list of all actions, most recent first.
@@ -113,16 +128,16 @@ An `HTTP 404 Not Found` status code is returned if the action with the specified
 {
   "id": "d24b3f17-bbf8-4c71-b2f0-a4334125d78d",
   "caseId": "7bc5d41b-0549-40b3-ba76-42f6d4cf3fdb",
-  "actionPlanId": "5381731e-e386-41a1-8462-26373744db86",
-  "actionRuleId": 120,
-  "actionTypeName": "HouseholdCreateVisit",
+  "actionPlanId": null,
+  "actionRuleId": null,
+  "actionTypeName": "BSREM",
   "createdBy": "SYSTEM",
-  "manuallyCreated": false,
-  "priority": 3,
+  "manuallyCreated": true,
+  "priority": null,
   "situation": null,
   "state": "SUBMITTED",
-  "createdDateTime": "2017-05-15T10:00:00Z",
-  "updatedDateTime": "2017-05-15T10:00:00Z"
+  "createdDateTime": "2017-10-05T14:37:30.014+0100",
+  "updatedDateTime": null
 }
 ```
 
@@ -190,7 +205,7 @@ An `HTTP 404 Not Found` status code is returned if the action with the specified
     "name": "C1O331D10E",
     "description": "Component 1 - England/online/field day ten/three reminders",
     "createdBy": "SYSTEM",
-    "lastGoodRunDateTime": "2017-06-15T10:00:00Z"
+    "lastRunDateTime": "2017-06-15T10:00:00Z"
   }
 ]
 ```
@@ -207,7 +222,7 @@ An `HTTP 204 No Content` status code is returned if there are no action plans.
   "name": "C1O331D10E",
   "description": "Component 1 - England/online/field day ten/three reminders",
   "createdBy": "SYSTEM",
-  "lastGoodRunDateTime": "2017-06-15T10:00:00Z"
+  "lastRunDateTime": "2017-06-15T10:00:00Z"
 }
 ```
 
@@ -216,7 +231,7 @@ An `HTTP 404 Not Found` status code is returned if the action plan with the spec
 ## Update Action Plan
 * `PUT /actionplans/5381731e-e386-41a1-8462-26373744db86` will update the details of the action plan with an ID of `5381731e-e386-41a1-8462-26373744db86`.
 
-*Optional parameters:* `description` as the action plan description, `lastGoodRunDateTime` as the date/time the action plan was last successfully run.
+*Optional parameters:* `description` as the action plan description, `lastRunDateTime` as the date/time the action plan was last successfully run.
 
 ### Example JSON Response
 ```json
@@ -225,7 +240,7 @@ An `HTTP 404 Not Found` status code is returned if the action plan with the spec
   "name": "C1O331D10E",
   "description": "Component 1 - England/online/field day ten/three reminders",
   "createdBy": "SYSTEM",
-  "lastGoodRunDateTime": "2017-06-15T10:00:00Z"
+  "lastRunDateTime": "2017-06-15T10:00:00Z"
 }
 ```
 
